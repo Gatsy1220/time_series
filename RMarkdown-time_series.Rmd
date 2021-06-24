@@ -1,0 +1,53 @@
+---
+title: "Time_series"
+author: "Agatha E.O"
+date: "24/06/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library (readr)
+urlfile = "https://raw.githubusercontent.com/ajaykuma/Datasets/master/power.csv"
+mydata <-read_csv(urlfile)
+```
+
+## R Markdown document exploring some timeseries data by ajaykuma
+
+Exploring the data
+
+```{r echo=FALSE}
+head(mydata)
+tail(mydata)
+```
+
+```{r pressure, echo=FALSE}
+summary(mydata)
+```
+```{r}
+str(mydata)
+```
+Transform first column to a date format
+```{r}
+mydata$START_DATE=as.Date(mydata$START_DATE, format="%d-%b-%y")
+str(mydata)
+head(mydata)
+```
+Convert date column to dataframe
+```{r}
+datedf <- mydata$START_DATE
+head(datedf)
+```
+Create year, month and day columns
+
+```{r}
+year <- as.numeric(format(datedf, "%y"))
+head(year)
+
+month <- as.numeric(format(datedf, "%m"))
+head(month)
+
+day <- as.numeric(format(datedf, "%d"))
+head(day)
+```
+
